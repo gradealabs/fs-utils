@@ -23,8 +23,8 @@
     "src/**/*.ts"
   ],
   "exclude": [
+    "**/*.d.ts",
     "**/*.test.ts",
-    "**/*.ts",
     "coverage/**",
     "lib/**"
   ],
