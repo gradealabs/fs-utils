@@ -8,7 +8,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "src/**/*.test.js",
-    "src/**/client*"
+    "src/**/*.test.*"
   ]
 }
