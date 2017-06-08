@@ -8,7 +8,13 @@ describe('mkdir', function () {
     .then(() => assert.ok(fs.existsSync('.tmp/a/b/c/d')))
     .then(() => mkdir('.tmp/a/b/c/d/e/f'))
     .then(() => assert.ok(fs.existsSync('.tmp/a/b/c/d/e/f')))
+    .then(() => mkdir('.tmp/a/b/c/d/e/f'))
+    .then(() => assert.ok(fs.existsSync('.tmp/a/b/c/d/e/f')))
+    .then(() => fs.writeFileSync('.tmp/a/b/c/d/e/f/g', '', 'utf8'))
+    .then(() => mkdir('.tmp/a/b/c/d/e/f/g/h'))
+    .catch(error => assert.strictEqual(error.code, 'ENOTDIR'))
     .then(() => {
+      fs.unlinkSync('.tmp/a/b/c/d/e/f/g')
       fs.rmdirSync('.tmp/a/b/c/d/e/f')
       fs.rmdirSync('.tmp/a/b/c/d/e')
       fs.rmdirSync('.tmp/a/b/c/d')
