@@ -1,0 +1,50 @@
+{
+  "name": "@gradealabs/fs-utils",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "postinstall": "ts-node ./scripts/postinstall",
+    "audit": "npm outdated --long",
+    "test": "cross-env NODE_ENV=test TS_NODE_PROJECT=./tsconfig.test.json nyc mocha",
+    "build": "npm run build:node",
+    "build:node": "tsc -p tsconfig.node.json",
+    "clean": "ts-node ./scripts/clean/cli lib coverage"
+  },
+  "keywords": [],
+  "author": "Darren Schnare <dschnare@gradealabs.com>",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "@types/mocha": "2.2.41",
+    "@types/node": "7.0.22",
+    "@types/sinon": "2.2.2",
+    "@types/yargs": "6.6.0",
+    "babel": "6.23.0",
+    "babel-eslint": "7.2.3",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
+    "cross-env": "5.0.0",
+    "eslint": "3.19.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-node": "4.2.2",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
+    "mocha": "3.4.2",
+    "nyc": "11.0.1",
+    "sinon": "2.3.1",
+    "source-map-support": "0.4.15",
+    "ts-node": "3.0.4",
+    "typescript": "2.3.3",
+    "yargs": "8.0.1"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "6.x",
+    "npm": "3.x"
+  }
+}

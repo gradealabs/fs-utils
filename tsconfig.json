@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "scripts/**/*"
+  ]
+}
