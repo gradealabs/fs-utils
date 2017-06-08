@@ -16,12 +16,14 @@ export default function mkdir (dir: string): Promise<void> {
     })
   }).catch(error => {
     if (error.code === 'EEXIST') {
+      /* istanbul ignore next */
       return Promise.resolve()
     } else if (error.code === 'ENOENT') {
       return mkdir(path.dirname(dir)).then(() => {
         return mkdir(dir)
       })
     } else {
+      /* istanbul ignore next */
       return Promise.reject(error)
     }
   })
