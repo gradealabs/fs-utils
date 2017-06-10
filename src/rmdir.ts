@@ -33,31 +33,34 @@ export default function rmdir (dirPath: string): Promise<void> {
       }
     })
   }).catch(error => {
-    if (error.code === 'ENOTEMPTY') {
-      return readdir(dirPath)
-      .then(files => {
+    if (error.code === 'ENOTEMPTY' || error.code === 'EPERM') {
+      return readdir(dirPath).then(files => {
         files = files.map(file => path.join(dirPath, file))
         return Promise.all(
           files.map(
             file => stat(file).then(stats => {
               return { path: file, stats }
+            }).catch(error => {
+              if (error.code === 'EPERM' || error.code === 'ENOENT') {
+                return null
+              } else {
+                return Promise.reject(error)
+              }
             })
           )
-        )
-        .then(results => {
+        ).then(results => {
           return {
-            dirs: results
+            dirs: results.filter(Boolean)
               .filter(({ stats }) => stats.isDirectory())
               .map(({ path }) => path),
-            files: results
+            files: results.filter(Boolean)
               .filter(({ stats }) => stats.isFile())
               .map(({ path }) => path)
           }
-        })
-        .then(({ dirs, files }) => {
-          return Promise.all(files.map(unlink))
-          .then(() => Promise.all(dirs.map(rmdir)))
-          .then(() => rmdir(dirPath))
+        }).then(({ dirs, files }) => {
+          return Promise.all(files.map(unlink)).then(() => {
+            return Promise.all(dirs.map(rmdir))
+          }).then(() => rmdir(dirPath))
         })
       })
     } else {

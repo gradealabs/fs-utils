@@ -61,7 +61,7 @@ export default function cp (src: string, dest: string, { newerOnly = false, noDo
     const [ srcStats, destStats ] = result
     const destIsDirectory = destStats
       ? destStats.isDirectory()
-      : dest.endsWith('/')
+      : dest.endsWith('/') || dest.endsWith('\\')
 
     if (srcStats.isFile()) {
       const d = destIsDirectory
@@ -83,7 +83,7 @@ export default function cp (src: string, dest: string, { newerOnly = false, noDo
 
             // Copy the contents of the source directory and not the directory
             // itself.
-            if (src.endsWith('/')) {
+            if (src.endsWith('/') || src.endsWith('\\')) {
               outFileSuffix = path.relative(src, file)
             }
 
