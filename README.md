@@ -4,7 +4,7 @@ A package that exposes several useful file system utility functions.
 
 ## Quick Start
 
-    npm install garadealabs/fs-utils -S
+    npm install gradealabs/fs-utils -S
 
     import { touch, mkdir } from '@gradealabs/fs-utils'
 
