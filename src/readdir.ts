@@ -3,12 +3,14 @@ import * as path from 'path'
 
 function _readdir (dir: string) {
   return new Promise<string[]>((resolve, reject) => {
+    /* istanbul ignore next */
     fs.readdir(dir, (error, files) => error ? reject(error) : resolve(files))
   })
 }
 
 function stat (file: string) {
   return new Promise<fs.Stats>((resolve, reject) => {
+    /* istanbul ignore next */
     fs.stat(file, (error, stats) => error ? reject(error) : resolve(stats))
   })
 }
@@ -21,8 +23,9 @@ function stat (file: string) {
  * recursive  Determines if the listing recursively includes subdirectories
  * filesOnly  Determines if only files will be returned in the listing
  * noDot  Determines if dot files will be excluded from the listing
+ * prefix Determines if the dirPath should be applied as the prefix to each file before returning
  */
-export default function readdir (dirPath: string, { recursive = false, filesOnly = false, noDot = true } = {}): Promise<string[]> {
+export default function readdir (dirPath: string, { recursive = false, filesOnly = false, noDot = true, prefix = true } = {}): Promise<string[]> {
   return _readdir(dirPath).then(files => {
     return files
       // Ignore dot files.
@@ -53,11 +56,16 @@ export default function readdir (dirPath: string, { recursive = false, filesOnly
     if (recursive) {
       return Promise.all(
         [].concat(
-          files.map(file => Promise.resolve(file)),
+          prefix ? files : files.map(file => path.relative(dirPath, file)),
           directories.map(dir => {
             return [
-              filesOnly ? null : Promise.resolve(dir),
-              readdir(dir, { recursive, filesOnly, noDot })
+              filesOnly ? null : (prefix ? dir : path.relative(dirPath, dir)),
+              readdir(dir, { recursive, filesOnly, noDot, prefix })
+                .then(files => {
+                  return prefix
+                    ? files
+                    : files.map(file => path.join(path.basename(dir), file))
+                })
             ]
           }).reduce((a, b) => a.concat(b), [])
         ).filter(Boolean)

@@ -78,4 +78,20 @@ describe('raddir', function () {
       })
       .then(done, done)
   })
+
+  it('should not prefix files and directories', function (done) {
+    readdir('.readdir-tmp', { recursive: true, filesOnly: false, noDot: false, prefix: false })
+      .then(listing => {
+        assert.deepStrictEqual(listing, [
+          '.e',
+          'a',
+          'b',
+          'c',
+          'e',
+          'e/f',
+          'e/g'
+        ].map(path.normalize))
+      })
+      .then(done, done)
+  })
 })

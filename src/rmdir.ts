@@ -9,12 +9,14 @@ function readdir (dir: string) {
 
 function stat (file: string) {
   return new Promise<fs.Stats>((resolve, reject) => {
+    /* istanbul ignore next */
     fs.stat(file, (error, stats) => error ? reject(error) : resolve(stats))
   })
 }
 
 function unlink (file: string) {
   return new Promise<void>((resolve, reject) => {
+    /* istanbul ignore next */
     fs.unlink(file, error => error ? reject(error) : resolve())
   })
 }
@@ -41,6 +43,7 @@ export default function rmdir (dirPath: string): Promise<void> {
             file => stat(file).then(stats => {
               return { path: file, stats }
             }).catch(error => {
+              /* istanbul ignore next */
               if (error.code === 'EPERM' || error.code === 'ENOENT') {
                 return null
               } else {

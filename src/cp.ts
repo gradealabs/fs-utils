@@ -19,6 +19,7 @@ const copyFile = (srcFile: string, dest: string, { newerOnly = false } = {}): Pr
     // We'll only ever get here if the dest does not exist.
     // By the time copyFile() is called the src has already been confirmed to
     // exist.
+    /* istanbul ignore next */
     return true
   }).then(shouldCopy => {
     if (shouldCopy) {
@@ -41,13 +42,15 @@ const copyFile = (srcFile: string, dest: string, { newerOnly = false } = {}): Pr
  * Copies a source to a destination.
  *
  * The copy source can be a file or a directory. If the copy source is a
- * directory ends with '/' then the contents of the directory will be copied and
- * not the directory itself.
+ * directory (ending with '/' or '\') then the contents of the directory will be
+ * copied and not the directory itself. Otherwise if the source is a directory
+ * then the entire directory will be copied.
  *
- * The copy destination can be a file or a directory path ending with '/'. If
- * the copy destination is a directory path then the basename of the copy source
- * will be suffixed to the directory. Any directories that do not exist in the
- * copy destination path will be created during the copy.
+ * The copy destination can be a file or a directory.
+ * If the copy destination is a directory or a path ending with '/' or '\' then
+ * the basename of the source will be suffixed by the directory path. Any
+ * directories that do not exist in the copy destination path will be created
+ * during the copy.
  *
  * Options:
  * newerOnly  Only newer files will be copied (if the destination alredy exists)
@@ -72,30 +75,33 @@ export default function cp (src: string, dest: string, { newerOnly = false, noDo
     } else if (srcStats.isDirectory()) {
       if (!destIsDirectory) {
         return Promise.reject(
-          new Error('Canot copy a directory to a file destination.')
+          Object.assign(
+            new Error('Canot copy a directory to a file destination.'),
+            { code: 'EFILEDEST' }
+          )
         )
       }
 
-      return readdir(src, { filesOnly: true, recursive: true, noDot }).then(files => {
+      return readdir(src, { filesOnly: true, recursive: true, prefix: false, noDot }).then(files => {
         return Promise.all(
           files.map(file => {
             let outFileSuffix = file
 
-            // Copy the contents of the source directory and not the directory
-            // itself.
-            if (src.endsWith('/') || src.endsWith('\\')) {
-              outFileSuffix = path.relative(src, file)
+            // Copy the entire directory.
+            if (!src.endsWith('/') && !src.endsWith('\\')) {
+              outFileSuffix = path.join(path.basename(src), file)
             }
 
             const d = destIsDirectory
               ? path.join(dest, outFileSuffix)
               : dest
 
-            return copyFile(file, d, { newerOnly })
+            return copyFile(path.join(src, file), d, { newerOnly })
           })
         )
       })
     } else {
+      /* istanbul ignore next */
       return Promise.reject(new Error(`Cannot copy from source ${src}`))
     }
   })
