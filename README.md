@@ -58,10 +58,10 @@ Reads a directory and returns a file listing.
 
 Supported options:
 
-- recursive {default: false} Recursively traverse sub directories
-- filesOnly {default: false} Only include files in the listing
-- noDot {default: true} Do not include any files that start with '.'
-- prefix {default: true} Prefix the files in the list with the dirPath
+- `recursive` {default: false} Recursively traverse sub directories
+- `filesOnly` {default: false} Only include files in the listing
+- `noDot` {default: true} Do not include any files that start with '.'
+- `prefix` {default: true} Prefix the files in the list with the dirPath
 
 Example:
 
@@ -78,8 +78,8 @@ Copies files and/or directories to a destination location.
 
 Supported options:
 
-- newerOnly {default: false} Only copy the file if newer than destination file
-- noDot {default: true} Ignore files that start with '.'
+- `newerOnly` {default: false} Only copy the file if newer than destination file
+- `noDot` {default: true} Ignore files that start with '.'
 
 *Copying Directories*
 
