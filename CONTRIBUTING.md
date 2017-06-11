@@ -1,5 +1,10 @@
 # Contributing
 
+## Quick Start
+
+    npm install
+    npm run setup
+
 ## Commit Message Format
 
 When installing the project dependencies locally a commit-msg hook will be
