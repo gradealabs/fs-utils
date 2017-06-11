@@ -5,7 +5,7 @@
   "description": "A package that exposes several useful file system utility functions.",
   "private": true,
   "scripts": {
-    "postinstall": "ts-node ./scripts/postinstall",
+    "setup": "ts-node ./scripts/postinstall",
     "audit": "npm outdated --long",
     "test": "cross-env NODE_ENV=test TS_NODE_PROJECT=./tsconfig.test.json nyc mocha",
     "build": "npm run build:node",
