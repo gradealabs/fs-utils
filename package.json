@@ -1,6 +1,6 @@
 {
   "name": "@gradealabs/fs-utils",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": "lib/index.js",
   "description": "A package that exposes several useful file system utility functions.",
   "scripts": {
@@ -13,6 +13,13 @@
   },
   "keywords": [],
   "author": "Darren Schnare <dschnare@gradealabs.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gradealabs.com/fs-utils"
+  },
+  "bugs": {
+    "url": "https://github.com/gradealabs.com/fs-utils/issues"
+  },
   "license": "MIT",
   "files": [
     "lib"
