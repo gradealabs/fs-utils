@@ -20,11 +20,11 @@
     "statements": [60, 75]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.*"
   ],
   "exclude": [
     "**/*.d.ts",
-    "**/*.test.ts",
+    "**/*.test.*",
     "coverage/**",
     "lib/**"
   ],
