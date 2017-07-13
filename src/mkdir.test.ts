@@ -10,7 +10,7 @@ describe('mkdir', function () {
     .then(() => assert.ok(fs.existsSync('.mkdir-tmp/a/b/c/d/e/f')))
     .then(() => mkdir('.mkdir-tmp/a/b/c/d/e/f'))
     .then(() => assert.ok(fs.existsSync('.mkdir-tmp/a/b/c/d/e/f')))
-    .then(() => fs.writeFileSync('.mkdir-tmp/a/b/c/d/e/f/g', '', 'utf8'))
+    .then(() => fs.writeFileSync('.mkdir-tmp/a/b/c/d/e/f/g', '', { encoding: 'utf8' }))
     .then(() => mkdir('.mkdir-tmp/a/b/c/d/e/f/g/h'))
     .catch(error => assert.strictEqual(error.code, 'ENOTDIR'))
     .then(() => {

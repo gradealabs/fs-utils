@@ -26,7 +26,8 @@
     "**/*.d.ts",
     "**/*.test.*",
     "coverage/**",
-    "lib/**"
+    "lib/**",
+    "src/index.ts"
   ],
   "extension": [
     ".ts"

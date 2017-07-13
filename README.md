@@ -52,6 +52,22 @@ Example:
       .then(() => console.log('done'))
       .catch(error => console.error(error))
 
+**rmdirfiles(dirPath)**
+
+Removes only the files inside a directory, but not the directory itself.
+
+Example:
+
+    import { rmdirfiles, mkdir, touch } from '@gradealabs/fs-utils'
+
+    Promise.resolve()
+      .then(() => mkdir('dist/a'))
+      .then(() => mkdir('dist/b'))
+      .then(() => touch('dist/file.js'))
+      .then(() => rmdirfiles('dist'))
+      .then(() => console.log('dist has been cleaned out'))
+      .catch(error => console.error(error))
+
 **readdir(dirPath, options)**
 
 Reads a directory and returns a file listing.
