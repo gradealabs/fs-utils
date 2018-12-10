@@ -51,7 +51,7 @@
   },
   "dependencies": {},
   "engines": {
-    "node": "6.x",
-    "npm": "3.x"
+    "node": ">=6.x",
+    "npm": ">=3.x"
   }
 }
