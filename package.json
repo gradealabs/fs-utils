@@ -1,6 +1,6 @@
 {
   "name": "@gradealabs/fs-utils",
-  "version": "2.2.5",
+  "version": "2.2.51",
   "main": "lib/index.js",
   "description": "A package that exposes several useful file system utility functions.",
   "scripts": {
