@@ -65,7 +65,7 @@ describe('cp', function () {
 
     cp('.cp-tmp/a', '.cp-tmp/out/', { newerOnly: true })
       .then(() => fs.statSync('.cp-tmp/out/a'))
-      .then(s => cp('.cp-tmp/a', '.cp-tmp/out').then(() => s))
+      .then(s => cp('.cp-tmp/a', '.cp-tmp/out', { newerOnly: true }).then(() => s))
       .then(s => {
         const destStats = fs.statSync('.cp-tmp/out/a')
         assert.strictEqual(destStats.mtime.getTime(), s.mtime.getTime())

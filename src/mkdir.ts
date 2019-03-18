@@ -6,7 +6,7 @@ import * as path from 'path'
  * calling `mkdir -p {path}` in Bash.
  */
 export default function mkdir (dir: string): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     fs.mkdir(dir, error => {
       if (error) {
         reject(error)

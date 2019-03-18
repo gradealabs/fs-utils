@@ -12,7 +12,10 @@
     "build:node": "tsc -p tsconfig.node.json",
     "clean": "ts-node ./scripts/clean/cli lib coverage"
   },
-  "keywords": ["files", "utility"],
+  "keywords": [
+    "files",
+    "utility"
+  ],
   "author": "Darren Schnare <dschnare@launchfort.com>",
   "repository": {
     "type": "git",
@@ -26,10 +29,10 @@
     "lib"
   ],
   "devDependencies": {
-    "@types/mocha": "2.2.41",
-    "@types/node": "7.0.29",
-    "@types/sinon": "2.3.1",
-    "@types/yargs": "6.6.0",
+    "@types/mocha": "5.2.6",
+    "@types/node": "11.11.3",
+    "@types/sinon": "7.0.10",
+    "@types/yargs": "12.0.10",
     "babel": "6.23.0",
     "babel-eslint": "7.2.3",
     "babel-plugin-transform-class-properties": "6.24.1",
@@ -37,17 +40,17 @@
     "cross-env": "5.0.1",
     "eslint": "3.19.0",
     "eslint-config-standard": "10.2.1",
-    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-import": "2.16.0",
     "eslint-plugin-node": "5.0.0",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
-    "mocha": "3.4.2",
-    "nyc": "11.0.2",
-    "sinon": "2.3.4",
-    "source-map-support": "0.4.15",
-    "ts-node": "3.0.6",
-    "typescript": "2.3.4",
-    "yargs": "8.0.1"
+    "mocha": "6.0.2",
+    "nyc": "13.3.0",
+    "sinon": "7.2.7",
+    "source-map-support": "0.5.11",
+    "ts-node": "8.0.3",
+    "typescript": "3.3.3333",
+    "yargs": "13.2.2"
   },
   "dependencies": {},
   "engines": {

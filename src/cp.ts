@@ -59,7 +59,7 @@ const copyFile = (srcFile: string, dest: string, { newerOnly = false } = {}): Pr
 export default function cp (src: string, dest: string, { newerOnly = false, noDot = true } = {}): Promise<void> {
   return Promise.all([
     stat(src),
-    stat(dest).catch(() => null)
+    stat(dest).catch<fs.Stats>(() => null)
   ]).then(result => {
     const [ srcStats, destStats ] = result
     const destIsDirectory = destStats
@@ -74,7 +74,7 @@ export default function cp (src: string, dest: string, { newerOnly = false, noDo
       return copyFile(src, d, { newerOnly })
     } else if (srcStats.isDirectory()) {
       if (!destIsDirectory) {
-        return Promise.reject(
+        return Promise.reject<void>(
           Object.assign(
             new Error('Canot copy a directory to a file destination.'),
             { code: 'EFILEDEST' }
@@ -99,10 +99,10 @@ export default function cp (src: string, dest: string, { newerOnly = false, noDo
             return copyFile(path.join(src, file), d, { newerOnly })
           })
         )
-      })
+      }).then(() => {})
     } else {
       /* istanbul ignore next */
-      return Promise.reject(new Error(`Cannot copy from source ${src}`))
+      return Promise.reject<void>(new Error(`Cannot copy from source ${src}`))
     }
   })
 }
