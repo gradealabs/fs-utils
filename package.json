@@ -1,6 +1,6 @@
 {
   "name": "@launchfort/fs-utils",
-  "version": "2.2.51",
+  "version": "2.2.6",
   "main": "lib/index.js",
   "description": "A package that exposes several useful file system utility functions.",
   "scripts": {
